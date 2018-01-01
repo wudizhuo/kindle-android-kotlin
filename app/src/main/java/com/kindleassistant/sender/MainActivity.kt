@@ -1,9 +1,10 @@
-package com.kindleassistant
+package com.kindleassistant.sender
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import com.kindleassistant.R
+import com.kindleassistant.common.BaseActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
