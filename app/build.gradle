@@ -7,17 +7,37 @@ android {
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
     defaultConfig {
-        applicationId "kindleassistant.com.kindle_android_kotlin"
+        applicationId "com.kindleassistant"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode 22
+        versionName "3.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    productFlavors {
+        flavorDimensions 'release'
+        domestic {
+            applicationId "com.kindleassistant"
+        }
+        googleplay_release {
+            applicationId "com.googleplay.kindleassistant"
+        }
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("../kindleassistant.jks")
+            storePassword System.getenv("KSTOREPWD")
+            keyAlias "kindlezhushou"
+            keyPassword System.getenv("KEYPWD")
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 }
