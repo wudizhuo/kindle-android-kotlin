@@ -1,4 +1,4 @@
-package kindleassistant.com.kindle_android_kotlin;
+package com.kindleassistant;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

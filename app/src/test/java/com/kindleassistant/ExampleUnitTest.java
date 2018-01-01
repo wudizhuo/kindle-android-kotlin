@@ -1,4 +1,4 @@
-package kindleassistant.com.kindle_android_kotlin;
+package com.kindleassistant;
 
 import org.junit.Test;
 
