@@ -18,6 +18,20 @@ class SenderPresenter @Inject constructor() : SenderContract.Presenter() {
             api.preview(it).subscribe {
                 //TODO add observer
             }
+
+
+//            api.preview(it)
+//                    .subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .doOnError { throwable ->
+//                        throwable.printStackTrace()
+//                        mView.setProgressIndicator(GONE)
+//                        mView.showError(throwable.getMessage())
+//                    }
+//                    .subscribe(
+//                            { response -> mView.showArtist(response.getMetadata().get(0).getArtist()) }, ,
+//                            { mView.setProgressIndicator(GONE) })
+
         }
     }
 }

@@ -14,7 +14,11 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        Fabric.with(this, Crashlytics())
+        val fabric = Fabric.Builder(this)
+                .kits(Crashlytics())
+                .debuggable(BuildConfig.DEBUG)
+                .build()
+        Fabric.with(fabric)
 
         //TODO 学习这个代码是怎么使用的
         appComponent = DaggerAppComponent.builder()

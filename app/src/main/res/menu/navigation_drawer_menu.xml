@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_navigation_drawer_help"
+        android:icon="@drawable/ic_help"
+        android:title="@string/help" />
+    <item
+        android:id="@+id/item_navigation_drawer_upload"
+        android:icon="@drawable/ic_upload"
+        android:title="@string/upload" />
+    <item
+        android:id="@+id/item_navigation_drawer_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/setting" />
+    <item
+        android:id="@+id/item_navigation_drawer_feedback"
+        android:icon="@drawable/ic_feedback"
+        android:title="@string/feedback" />
+</menu>
