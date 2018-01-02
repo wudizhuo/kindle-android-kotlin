@@ -1,19 +1,23 @@
 package com.kindleassistant.sender
 
+import com.kindleassistant.api.ApiService
+import io.reactivex.rxkotlin.plusAssign
 import javax.inject.Inject
 
-class SenderPresenter @Inject constructor() : SenderContract.Presenter {
-    private var mView: SenderContract.View? = null
+class SenderPresenter @Inject constructor() : SenderContract.Presenter() {
+    @Inject
+    lateinit var api: ApiService
+    private lateinit var mView: SenderContract.View
 
     override fun attachView(view: SenderContract.View) {
+        super.attachView(view)
         mView = view
-    }
 
-    override fun detachView() {
-        mView = null
-    }
-
-    override fun loadData() {
-
+        loadDisposables += mView.previewIntent().subscribe {
+            //TODO add dispose  loadDisposables +
+            api.preview(it).subscribe {
+                //TODO add observer
+            }
+        }
     }
 }

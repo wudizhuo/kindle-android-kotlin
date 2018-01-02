@@ -1,8 +1,16 @@
 package com.kindleassistant.common
 
-interface BasePresenter<T> {
+import io.reactivex.disposables.CompositeDisposable
 
-    fun attachView(view: T)
+abstract class BasePresenter<T> {
+    var loadDisposables: CompositeDisposable = CompositeDisposable()
 
-    fun detachView()
+    open fun attachView(view: T) {
+        loadDisposables.clear()
+    }
+
+    open fun detachView() {
+        loadDisposables.dispose()
+    }
 }
+
