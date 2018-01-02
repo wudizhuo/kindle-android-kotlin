@@ -16,6 +16,7 @@ class App : Application() {
         super.onCreate()
         Fabric.with(this, Crashlytics())
 
+        //TODO 学习这个代码是怎么使用的
         appComponent = DaggerAppComponent.builder()
                 .appModule(AppModule(this))
                 .build()
