@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#D3D3D3"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingTop="@dimen/common_page_edge_padding">
+
+        <EditText
+            android:id="@+id/et_from_email"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:gravity="center_vertical"
+            android:hint="请填入一个您的认可列表的邮箱"
+            android:paddingLeft="4dp"
+            android:paddingStart="4dp"
+            android:singleLine="true" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingTop="@dimen/common_page_edge_padding">
+
+        <EditText
+            android:id="@+id/et_user_email"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:gravity="center_vertical"
+            android:hint="请填入您的kindle接收邮箱"
+            android:paddingLeft="4dp"
+            android:paddingStart="4dp"
+            android:singleLine="true" />
+
+        <Spinner
+            android:id="@+id/sp_emails"
+            android:layout_width="107dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:entries="@array/sp_emails" />
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/bt_save_useremail"
+        style="@style/sendbutton"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="@dimen/common_page_edge_padding"
+        android:background="@drawable/btn_selector"
+        android:text="@string/Done" />
+
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="@dimen/common_page_edge_padding" />
+
+</LinearLayout>
