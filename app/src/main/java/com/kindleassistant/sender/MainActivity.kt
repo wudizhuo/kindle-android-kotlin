@@ -12,6 +12,7 @@ import com.kindleassistant.App
 import com.kindleassistant.R
 import com.kindleassistant.common.BaseActivity
 import com.kindleassistant.helper.HelperActivity
+import com.kindleassistant.preview.PreviewActivity
 import com.kindleassistant.setting.SettingActivity
 import com.kindleassistant.upload.UploadActivity
 import com.kindleassistant.util.ToastUtil
@@ -51,7 +52,8 @@ class MainActivity : BaseActivity(), SenderContract.View {
 
     private fun initView() {
         bt_clear.setOnClickListener {
-            et_user_url.setText("")
+            //TODO test
+            et_user_url.setText("https://mp.weixin.qq.com/s/46Vzcw029FHpMW7Qf8My5Q")
         }
 
         setSupportActionBar(toolbar)
@@ -98,4 +100,18 @@ class MainActivity : BaseActivity(), SenderContract.View {
         presenter.detachView()
     }
 
+    override fun showContent(content: String) {
+        val intent = Intent()
+        intent.setClass(this, PreviewActivity::class.java)
+        intent.putExtra("content", content)
+        startActivity(intent)
+    }
+
+    override fun setProgressIndicator(visible: Int) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun showError(message: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }

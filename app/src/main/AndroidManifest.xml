@@ -24,6 +24,16 @@
         <activity android:name=".setting.SettingActivity" />
         <activity android:name=".upload.UploadActivity" />
 
+        <activity
+            android:name="com.nononsenseapps.filepicker.FilePickerActivity"
+            android:label="@string/app_name"
+            android:theme="@style/FilePickerTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.GET_CONTENT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="c34746de241e24935c4bd0632fe4f1a0e0c2268e" />

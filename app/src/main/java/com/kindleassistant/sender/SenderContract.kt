@@ -5,9 +5,12 @@ import io.reactivex.Observable
 
 
 class SenderContract {
-    interface View{
+    interface View {
         fun previewIntent(): Observable<String>
+        fun showContent(content: String)
+        fun setProgressIndicator(visible: Int)
+        fun showError(message: String)
     }
 
-    abstract class Presenter: BasePresenter<View>()
+    abstract class Presenter : BasePresenter<View>()
 }

@@ -1,7 +1,10 @@
 package com.kindleassistant.sender
 
+import android.view.View.GONE
 import com.kindleassistant.api.ApiService
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.plusAssign
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class SenderPresenter @Inject constructor() : SenderContract.Presenter() {
@@ -15,22 +18,21 @@ class SenderPresenter @Inject constructor() : SenderContract.Presenter() {
 
         loadDisposables += mView.previewIntent().subscribe {
             //TODO add dispose  loadDisposables +
-            api.preview(it).subscribe {
-                //TODO add observer
-            }
+            loadDisposables += api.preview(it)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                            //TODO add end show dialog
+                            { mView.showContent(it.content) },
+                            {
+                                it.printStackTrace()
+                                //TODO add show dialog
+                                mView.setProgressIndicator(GONE)
+                                mView.showError(it.message!!)
+                            },
+                            { mView.setProgressIndicator(GONE) }
+                    )
 
-
-//            api.preview(it)
-//                    .subscribeOn(Schedulers.io())
-//                    .observeOn(AndroidSchedulers.mainThread())
-//                    .doOnError { throwable ->
-//                        throwable.printStackTrace()
-//                        mView.setProgressIndicator(GONE)
-//                        mView.showError(throwable.getMessage())
-//                    }
-//                    .subscribe(
-//                            { response -> mView.showArtist(response.getMetadata().get(0).getArtist()) }, ,
-//                            { mView.setProgressIndicator(GONE) })
 
         }
     }
