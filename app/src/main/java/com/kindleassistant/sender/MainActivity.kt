@@ -108,10 +108,10 @@ class MainActivity : BaseActivity(), SenderContract.View {
     }
 
     override fun setProgressIndicator(visible: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showError(message: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

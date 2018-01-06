@@ -10,9 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".sender.MainActivity"
-            android:theme="@style/MainActivityTheme"
-            >
+        <activity
+            android:name=".sender.MainActivity"
+            android:theme="@style/MainActivityTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,6 +23,7 @@
         <activity android:name=".helper.HelperActivity" />
         <activity android:name=".setting.SettingActivity" />
         <activity android:name=".upload.UploadActivity" />
+        <activity android:name=".preview.PreviewActivity" />
 
         <activity
             android:name="com.nononsenseapps.filepicker.FilePickerActivity"
