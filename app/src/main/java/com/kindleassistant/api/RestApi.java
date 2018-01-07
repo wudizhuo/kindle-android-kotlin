@@ -3,7 +3,8 @@ package com.kindleassistant.api;
 
 import com.kindleassistant.sender.model.entity.PreViewRequest;
 import com.kindleassistant.sender.model.entity.PreViewRsp;
-import com.kindleassistant.sender.model.entity.SendUrl;
+import com.kindleassistant.sender.model.entity.SendRequest;
+import com.kindleassistant.sender.model.entity.SendRsp;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ import retrofit2.http.Part;
 public interface RestApi {
 
     @POST("send")
-    Call<Void> send(@Body SendUrl send);
+    Observable<SendRsp> send(@Body SendRequest send);
 
     @POST("preview")
     Observable<PreViewRsp> preview(@Body PreViewRequest send);

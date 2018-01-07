@@ -44,6 +44,20 @@ class MainActivity : BaseActivity(), SenderContract.View {
                 })
     }
 
+    override fun sendIntent(): Observable<String> {
+        return bt_send.clicks()
+                .map { et_user_url.text.toString() }
+                .filter({ url ->
+                    if (TextUtils.isEmpty(url)) {
+                        //TODO show Toast
+                        val toast = Toast.makeText(applicationContext,
+                                "请填写文章链接", Toast.LENGTH_SHORT)
+                        toast.show()
+                    }
+                    return@filter !TextUtils.isEmpty(url)
+                })
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         App.appComponent.inject(this)
@@ -122,5 +136,9 @@ class MainActivity : BaseActivity(), SenderContract.View {
 
     override fun showError(message: String) {
         Snackbar.make(containerView, message, Snackbar.LENGTH_LONG).show()
+    }
+
+    override fun goToSetting() {
+        startActivity(Intent(this, SettingActivity::class.java))
     }
 }
