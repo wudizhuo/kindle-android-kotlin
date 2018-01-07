@@ -1,6 +1,7 @@
 package com.kindleassistant.sender
 
 import android.view.View.GONE
+import android.view.View.VISIBLE
 import com.kindleassistant.api.ApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.plusAssign
@@ -17,16 +18,14 @@ class SenderPresenter @Inject constructor() : SenderContract.Presenter() {
         mView = view
 
         loadDisposables += mView.previewIntent().subscribe {
-            //TODO add dispose  loadDisposables +
+            mView.setProgressIndicator(VISIBLE)
             loadDisposables += api.preview(it)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
-                            //TODO add end show dialog
                             { mView.showContent(it.content) },
                             {
                                 it.printStackTrace()
-                                //TODO add show dialog
                                 mView.setProgressIndicator(GONE)
                                 mView.showError(it.message!!)
                             },

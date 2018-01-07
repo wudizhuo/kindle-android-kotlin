@@ -8,7 +8,7 @@ class SenderContract {
     interface View {
         fun previewIntent(): Observable<String>
         fun showContent(content: String)
-        fun setProgressIndicator(visible: Int)
+        fun setProgressIndicator(visibility: Int)
         fun showError(message: String)
     }
 

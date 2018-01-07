@@ -3,9 +3,11 @@ package com.kindleassistant.sender
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
 import android.text.TextUtils
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import com.jakewharton.rxbinding2.view.clicks
 import com.kindleassistant.App
@@ -16,6 +18,7 @@ import com.kindleassistant.preview.PreviewActivity
 import com.kindleassistant.setting.SettingActivity
 import com.kindleassistant.upload.UploadActivity
 import com.kindleassistant.util.ToastUtil
+import com.roger.catloadinglibrary.CatLoadingView
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
@@ -25,6 +28,7 @@ import javax.inject.Inject
 class MainActivity : BaseActivity(), SenderContract.View {
     @Inject
     lateinit var presenter: SenderContract.Presenter
+    private lateinit var loadingView: CatLoadingView
 
     override fun previewIntent(): Observable<String> {
         return bt_preview.clicks()
@@ -51,6 +55,7 @@ class MainActivity : BaseActivity(), SenderContract.View {
     }
 
     private fun initView() {
+        loadingView = CatLoadingView()
         bt_clear.setOnClickListener {
             //TODO test
             et_user_url.setText("https://mp.weixin.qq.com/s/46Vzcw029FHpMW7Qf8My5Q")
@@ -107,11 +112,15 @@ class MainActivity : BaseActivity(), SenderContract.View {
         startActivity(intent)
     }
 
-    override fun setProgressIndicator(visible: Int) {
-        // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun setProgressIndicator(visibility: Int) {
+        if (visibility == View.VISIBLE) {
+            loadingView.show(supportFragmentManager, "loadingView")
+        } else {
+            loadingView.dismiss()
+        }
     }
 
     override fun showError(message: String) {
-        // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Snackbar.make(containerView, message, Snackbar.LENGTH_LONG).show()
     }
 }

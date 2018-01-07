@@ -67,6 +67,7 @@ dependencies {
     compile 'com.squareup.okhttp3:logging-interceptor:3.9.0'
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'com.nononsenseapps:filepicker:3.0.0'
+    compile 'com.roger.catloadinglibrary:catloadinglibrary:1.0.1'
 }
 repositories {
     mavenCentral()
