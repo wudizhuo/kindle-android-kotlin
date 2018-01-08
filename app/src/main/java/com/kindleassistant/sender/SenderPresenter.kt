@@ -2,8 +2,11 @@ package com.kindleassistant.sender
 
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import com.google.gson.Gson
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException
 import com.kindleassistant.AppPreferences
 import com.kindleassistant.api.ApiService
+import com.kindleassistant.api.HttpError
 import com.kindleassistant.sender.model.entity.SendRequest
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.plusAssign
@@ -29,7 +32,11 @@ class SenderPresenter @Inject constructor() : SenderContract.Presenter() {
                             {
                                 it.printStackTrace()
                                 mView.setProgressIndicator(GONE)
-                                mView.showError(it.message!!)
+                                if (it is HttpException) {
+                                    mView.showError(Gson().fromJson(it.response().errorBody()?.string(), HttpError::class.java).message.orEmpty())
+                                } else {
+                                    mView.showError(it.message!!)
+                                }
                             },
                             { mView.setProgressIndicator(GONE) }
                     )
@@ -56,7 +63,11 @@ class SenderPresenter @Inject constructor() : SenderContract.Presenter() {
                             {
                                 it.printStackTrace()
                                 mView.setProgressIndicator(GONE)
-                                mView.showError(it.message!!)
+                                if (it is HttpException) {
+                                    mView.showError(Gson().fromJson(it.response().errorBody()?.string(), HttpError::class.java).message.orEmpty())
+                                } else {
+                                    mView.showError(it.message!!)
+                                }
                             },
                             { mView.setProgressIndicator(GONE) }
                     )

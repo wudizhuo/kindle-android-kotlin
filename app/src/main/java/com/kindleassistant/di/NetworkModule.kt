@@ -33,6 +33,7 @@ class NetworkModule {
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .writeTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(10, TimeUnit.SECONDS)
+
         return builder.build()
     }
 
@@ -56,14 +57,14 @@ class NetworkModule {
                 .addConverterFactory(gsonConverterFactory)
                 .client(httpClient)
                 .build()
+
         return retrofit.create(RestApi::class.java)
     }
 
 }
 
 //TODO add Tracking
-internal class TrackingInterceptor(
-) : Interceptor {
+internal class TrackingInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
 

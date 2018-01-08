@@ -2,8 +2,11 @@ package com.kindleassistant.upload
 
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import com.google.gson.Gson
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException
 import com.kindleassistant.AppPreferences
 import com.kindleassistant.api.ApiService
+import com.kindleassistant.api.HttpError
 import com.kindleassistant.api.ProgressRequestBody
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.plusAssign
@@ -12,6 +15,7 @@ import okhttp3.MultipartBody
 import java.io.File
 import java.util.*
 import javax.inject.Inject
+
 
 class UploadPresenter @Inject constructor() : UploadContract.Presenter() {
     @Inject
@@ -48,8 +52,13 @@ class UploadPresenter @Inject constructor() : UploadContract.Presenter() {
                             { mView.showSuccess() },
                             {
                                 it.printStackTrace()
+                                if (it is HttpException) {
+                                    mView.showError(Gson().fromJson(it.response().errorBody()?.string(), HttpError::class.java).message.orEmpty())
+                                } else {
+                                    mView.showError(it.message!!)
+                                }
                                 mView.setProgressIndicator(GONE)
-                                mView.showError(it.message!!)
+
                             },
                             { mView.setProgressIndicator(GONE) }
                     )
