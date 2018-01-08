@@ -15,5 +15,4 @@
     <string name="from_email_hint">请填写正确的发送邮箱</string>
     <string name="to_email_hint">请填入Kindle接收邮箱</string>
     <string name="show_done">设置完成</string>
-
 </resources>
