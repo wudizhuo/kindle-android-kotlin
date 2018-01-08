@@ -24,7 +24,7 @@
         <item name="android:textColorSecondary">@android:color/white</item>
     </style>
 
-    <style name="sendbutton">
+    <style name="sendButton">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">#ffffffff</item>
         <item name="android:shadowColor">#101112</item>
@@ -34,6 +34,8 @@
         <item name="android:paddingLeft">8dp</item>
         <item name="android:paddingRight">8dp</item>
         <item name="android:paddingTop">5dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/btn_selector</item>
     </style>
 
     <style name="title_text">
