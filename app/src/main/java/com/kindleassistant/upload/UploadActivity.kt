@@ -1,13 +1,13 @@
 package com.kindleassistant.upload
 
-import android.annotation.TargetApi
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import android.os.Build
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Environment
-import android.os.Handler
-import android.text.TextUtils
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 import android.view.View
 import android.widget.TextView
 import com.kindleassistant.AppPreferences
@@ -22,30 +22,53 @@ import java.io.File
 class UploadActivity : BaseActivity() {
     private var uploadFile = ""
     private val FILE_SELECT_CODE = 0
+    private val PERMISSIONS_REQUEST = 101
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_uploads)
+
+        if (AppPreferences.fromEmail.isEmpty() || AppPreferences.toEmail.isEmpty()) {
+            startActivity(Intent(this, SettingActivity::class.java))
+            return
+        }
+
         btn_select.setOnClickListener {
-            showFileChooser()
+            checkAndShow()
         }
     }
 
-    private fun updateClick() {
-        if (TextUtils.isEmpty(AppPreferences.toEmail) || TextUtils.isEmpty(AppPreferences.fromEmail)) {
-            ToastUtil.showInCenter("请先设置发送邮箱或者信任邮箱")
-            Handler().postDelayed({
-                val intent = Intent(this@UploadActivity,
-                        SettingActivity::class.java)
-                startActivity(intent)
-            }, 100)
-            return
-        }
-        uploadFile()
+    private fun checkAndShow() {
+        checkPermission()
     }
 
     private fun uploadFile() {
 
+    }
+
+    private fun checkPermission() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                    PERMISSIONS_REQUEST)
+        } else {
+            showFileChooser()
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int,
+                                            permissions: Array<String>, grantResults: IntArray) {
+        when (requestCode) {
+            PERMISSIONS_REQUEST -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    showFileChooser()
+                } else {
+                    ToastUtil.show(getString(R.string.permission_denied))
+                    finish()
+                }
+            }
+        }
     }
 
     private fun showFileChooser() {
@@ -57,8 +80,7 @@ class UploadActivity : BaseActivity() {
         startActivityForResult(intent, FILE_SELECT_CODE)
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == FILE_SELECT_CODE && resultCode == Activity.RESULT_OK) {
             val uri = data.data
             uploadFile = uri!!.path
