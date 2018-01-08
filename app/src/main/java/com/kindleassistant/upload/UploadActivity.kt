@@ -9,36 +9,42 @@ import android.os.Environment
 import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
-import android.view.View
-import android.widget.TextView
-import com.kindleassistant.AppPreferences
+import com.jakewharton.rxbinding2.view.clicks
+import com.kindleassistant.App
 import com.kindleassistant.R
 import com.kindleassistant.common.BaseActivity
 import com.kindleassistant.setting.SettingActivity
 import com.kindleassistant.util.ToastUtil
+import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar
 import com.nononsenseapps.filepicker.FilePickerActivity
+import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_uploads.*
 import kotlinx.android.synthetic.main.view_main.*
 import java.io.File
+import javax.inject.Inject
 
 private const val PERMISSIONS_REQUEST = 101
 private const val FILE_SELECT_CODE = 0
 
-class UploadActivity : BaseActivity() {
+class UploadActivity : BaseActivity(), UploadContract.View {
+    @Inject
+    lateinit var presenter: UploadContract.Presenter
+
     private var uploadFile = ""
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        App.appComponent.inject(this)
         setContentView(R.layout.activity_uploads)
-
-        if (AppPreferences.fromEmail.isEmpty() || AppPreferences.toEmail.isEmpty()) {
-            startActivity(Intent(this, SettingActivity::class.java))
-            return
-        }
-
+        presenter.attachView(this)
         btn_select.setOnClickListener {
             checkAndShow()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.detachView()
     }
 
     private fun checkAndShow() {
@@ -52,12 +58,15 @@ class UploadActivity : BaseActivity() {
         }
     }
 
-    private fun uploadFile() {
-        if (uploadFile.isEmpty()) {
-            Snackbar.make(containerView, R.string.snack_pick_file, Snackbar.LENGTH_LONG).show()
-            return
-        }
-
+    override fun uploadFileIntent(): Observable<String> {
+        return btn_upload.clicks()
+                .map { uploadFile }
+                .filter({ it ->
+                    if (it.isEmpty()) {
+                        Snackbar.make(containerView, R.string.snack_pick_file, Snackbar.LENGTH_LONG).show()
+                    }
+                    return@filter it.isNotEmpty()
+                })
     }
 
     override fun onRequestPermissionsResult(requestCode: Int,
@@ -89,8 +98,27 @@ class UploadActivity : BaseActivity() {
 
             val file = File(uploadFile)
             val length = file.length().toFloat()
-            val fileText = findViewById<View>(R.id.file) as TextView
-            fileText.text = this.uploadFile + "   大小为：" + String.format("%.5f", length / (1024 * 1024)) + "M"
+            file_description.text = this.uploadFile + "   大小为：" + String.format("%.5f", length / (1024 * 1024)) + "M"
         }
+    }
+
+    override fun setProgressIndicator(visibility: Int) {
+        progressBar.visibility = visibility
+    }
+
+    override fun showError(message: String) {
+        Snackbar.make(containerView, message, Snackbar.LENGTH_LONG).show()
+    }
+
+    override fun goToSetting() {
+        startActivity(Intent(this, SettingActivity::class.java))
+    }
+
+    override fun showSuccess() {
+        Snackbar.make(containerView, R.string.show_success, Snackbar.LENGTH_LONG).show()
+    }
+
+    override fun showProgress(percentage: Int) {
+        (progressBar as CircleProgressBar).progress = percentage
     }
 }
