@@ -102,6 +102,7 @@ class UploadActivity : BaseActivity(), UploadContract.View {
     }
 
     override fun setProgressIndicator(visibility: Int) {
+        (progressBar as CircleProgressBar).isShowArrow = true
         progressBar.visibility = visibility
     }
 
