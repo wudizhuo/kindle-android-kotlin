@@ -19,7 +19,6 @@ import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar
 import com.nononsenseapps.filepicker.FilePickerActivity
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_uploads.*
-import kotlinx.android.synthetic.main.view_main.*
 import java.io.File
 import javax.inject.Inject
 
@@ -63,7 +62,7 @@ class UploadActivity : BaseActivity(), UploadContract.View {
                 .map { uploadFile }
                 .filter({ it ->
                     if (it.isEmpty()) {
-                        Snackbar.make(containerView, R.string.snack_pick_file, Snackbar.LENGTH_LONG).show()
+                        Snackbar.make(btn_upload, R.string.snack_pick_file, Snackbar.LENGTH_LONG).show()
                     }
                     return@filter it.isNotEmpty()
                 })
@@ -107,7 +106,7 @@ class UploadActivity : BaseActivity(), UploadContract.View {
     }
 
     override fun showError(message: String) {
-        Snackbar.make(containerView, message, Snackbar.LENGTH_LONG).show()
+        Snackbar.make(btn_upload, message, Snackbar.LENGTH_LONG).show()
     }
 
     override fun goToSetting() {
@@ -115,7 +114,7 @@ class UploadActivity : BaseActivity(), UploadContract.View {
     }
 
     override fun showSuccess() {
-        Snackbar.make(containerView, R.string.show_success, Snackbar.LENGTH_LONG).show()
+        Snackbar.make(btn_upload, R.string.show_success, Snackbar.LENGTH_LONG).show()
     }
 
     override fun showProgress(percentage: Int) {
