@@ -52,7 +52,7 @@ class SenderPresenter @Inject constructor() : SenderContract.Presenter() {
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
-                            { },
+                            { mView.showSuccess() },
                             {
                                 it.printStackTrace()
                                 mView.setProgressIndicator(GONE)

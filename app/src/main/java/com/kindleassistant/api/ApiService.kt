@@ -3,7 +3,6 @@ package com.kindleassistant.api
 import com.kindleassistant.sender.model.entity.PreViewRequest
 import com.kindleassistant.sender.model.entity.PreViewRsp
 import com.kindleassistant.sender.model.entity.SendRequest
-import com.kindleassistant.sender.model.entity.SendRsp
 import io.reactivex.Observable
 import javax.inject.Inject
 
@@ -15,7 +14,7 @@ class ApiService @Inject constructor() {
         return api.preview(PreViewRequest(url))
     }
 
-    fun send(request: SendRequest): Observable<SendRsp> {
+    fun send(request: SendRequest): Observable<Unit> {
         return api.send(request)
     }
 }

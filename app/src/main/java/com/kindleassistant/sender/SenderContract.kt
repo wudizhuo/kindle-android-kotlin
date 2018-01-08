@@ -12,6 +12,7 @@ class SenderContract {
         fun setProgressIndicator(visibility: Int)
         fun showError(message: String)
         fun goToSetting()
+        fun showSuccess()
     }
 
     abstract class Presenter : BasePresenter<View>()

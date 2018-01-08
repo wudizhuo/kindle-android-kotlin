@@ -141,4 +141,8 @@ class MainActivity : BaseActivity(), SenderContract.View {
     override fun goToSetting() {
         startActivity(Intent(this, SettingActivity::class.java))
     }
+
+    override fun showSuccess() {
+        Snackbar.make(containerView, R.string.show_success, Snackbar.LENGTH_LONG).show()
+    }
 }
