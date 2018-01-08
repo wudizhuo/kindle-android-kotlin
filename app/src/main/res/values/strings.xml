@@ -17,4 +17,6 @@
     <string name="show_done">设置完成</string>
     <string name="show_success">发送成功</string>
     <string name="permission_denied">Permission denied</string>
+    <string name="tip_upload_file">上传文件名：</string>
+    <string name="pick_file">选择文件</string>
 </resources>

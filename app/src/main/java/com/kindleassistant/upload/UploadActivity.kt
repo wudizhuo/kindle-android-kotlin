@@ -19,10 +19,11 @@ import com.nononsenseapps.filepicker.FilePickerActivity
 import kotlinx.android.synthetic.main.activity_uploads.*
 import java.io.File
 
+private const val PERMISSIONS_REQUEST = 101
+private const val FILE_SELECT_CODE = 0
+
 class UploadActivity : BaseActivity() {
     private var uploadFile = ""
-    private val FILE_SELECT_CODE = 0
-    private val PERMISSIONS_REQUEST = 101
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,14 +40,6 @@ class UploadActivity : BaseActivity() {
     }
 
     private fun checkAndShow() {
-        checkPermission()
-    }
-
-    private fun uploadFile() {
-
-    }
-
-    private fun checkPermission() {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
@@ -55,6 +48,10 @@ class UploadActivity : BaseActivity() {
         } else {
             showFileChooser()
         }
+    }
+
+    private fun uploadFile() {
+
     }
 
     override fun onRequestPermissionsResult(requestCode: Int,
@@ -81,9 +78,8 @@ class UploadActivity : BaseActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == FILE_SELECT_CODE && resultCode == Activity.RESULT_OK) {
-            val uri = data.data
-            uploadFile = uri!!.path
+        if (requestCode == FILE_SELECT_CODE && resultCode == Activity.RESULT_OK && data != null) {
+            uploadFile = data.data.path
 
             val file = File(uploadFile)
             val length = file.length().toFloat()

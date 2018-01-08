@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#eeeeee"
     android:orientation="vertical">
 
     <Button
@@ -10,31 +9,21 @@
         style="@style/sendButton"
         android:layout_width="fill_parent"
         android:layout_height="50dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/btn_selector"
-        android:text="选择文件" />
+        android:layout_margin="@dimen/common_page_edge_padding"
+        android:text="@string/pick_file" />
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="10dp"
-        android:text="上传文件名：" />
+        android:layout_margin="@dimen/common_page_edge_padding"
+        android:text="@string/tip_upload_file" />
 
     <TextView
         android:id="@+id/file"
         android:layout_width="fill_parent"
         android:layout_height="100dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="10dp"
-        android:background="#e0e0e0"
-        android:text="" />
+        android:layout_margin="@dimen/common_page_edge_padding"
+        android:background="#e0e0e0" />
 
     <Button
         android:id="@+id/upload"
@@ -45,6 +34,6 @@
         android:layout_marginRight="4dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/btn_selector"
-        android:text="上传" />
+        android:text="@string/send_to_kindle" />
 
 </LinearLayout>
