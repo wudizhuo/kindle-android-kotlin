@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Environment
+import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.view.View
@@ -17,6 +18,7 @@ import com.kindleassistant.setting.SettingActivity
 import com.kindleassistant.util.ToastUtil
 import com.nononsenseapps.filepicker.FilePickerActivity
 import kotlinx.android.synthetic.main.activity_uploads.*
+import kotlinx.android.synthetic.main.view_main.*
 import java.io.File
 
 private const val PERMISSIONS_REQUEST = 101
@@ -51,6 +53,10 @@ class UploadActivity : BaseActivity() {
     }
 
     private fun uploadFile() {
+        if (uploadFile.isEmpty()) {
+            Snackbar.make(containerView, R.string.snack_pick_file, Snackbar.LENGTH_LONG).show()
+            return
+        }
 
     }
 
