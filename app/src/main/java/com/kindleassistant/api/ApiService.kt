@@ -5,7 +5,6 @@ import com.kindleassistant.sender.model.entity.PreViewRsp
 import com.kindleassistant.sender.model.entity.SendRequest
 import io.reactivex.Observable
 import okhttp3.MultipartBody
-import retrofit2.Response
 import javax.inject.Inject
 
 class ApiService @Inject constructor() {
@@ -16,11 +15,7 @@ class ApiService @Inject constructor() {
         return api.preview(PreViewRequest(url))
     }
 
-    fun send(request: SendRequest): Observable<Response<Unit>> {
-        return api.send(request)
-    }
+    fun send(request: SendRequest) = api.send(request)
 
-    fun upload(multipartBody: List<MultipartBody.Part>): Observable<Response<Unit>> {
-        return api.upload(multipartBody)
-    }
+    fun upload(multipartBody: List<MultipartBody.Part>) = api.upload(multipartBody)
 }
