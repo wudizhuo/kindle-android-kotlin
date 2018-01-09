@@ -9,12 +9,9 @@ import dagger.Provides
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
-import okhttp3.ResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.lang.reflect.Type
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -55,20 +52,12 @@ class NetworkModule {
                                 gsonConverterFactory: GsonConverterFactory): RestApi {
         val retrofit = Retrofit.Builder()
                 .baseUrl("http://api.kindlezhushou.com/")
-                .addConverterFactory(NullOnEmptyConverterFactory())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(gsonConverterFactory)
                 .client(httpClient)
                 .build()
 
         return retrofit.create(RestApi::class.java)
-    }
-}
-
-internal class NullOnEmptyConverterFactory : Converter.Factory() {
-    override fun responseBodyConverter(type: Type?, annotations: Array<out Annotation>?, retrofit: Retrofit?): Converter<ResponseBody, *>? {
-        val delegate = retrofit?.nextResponseBodyConverter<ResponseBody>(this, type!!, annotations)
-        return Converter<ResponseBody, Any> { body -> if (body.contentLength() == 0L) null else delegate!!.convert(body) }
     }
 }
 
