@@ -8,7 +8,6 @@ import android.support.v4.view.GravityCompat
 import android.text.TextUtils
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import com.jakewharton.rxbinding2.view.clicks
 import com.kindleassistant.App
 import com.kindleassistant.R
@@ -31,33 +30,23 @@ class MainActivity : BaseActivity(), SenderContract.View {
     lateinit var presenter: SenderContract.Presenter
     private lateinit var loadingView: CatLoadingView
 
-    override fun previewIntent(): Observable<String> {
-        return bt_preview.clicks()
-                .map { et_user_url.text.toString() }
+    private fun getContentUrl(observable: Observable<Unit>): Observable<String> {
+        return observable
+                .map { et_content_url.text.toString() }
                 .filter({ url ->
                     if (TextUtils.isEmpty(url)) {
-                        //TODO show Toast
-                        val toast = Toast.makeText(applicationContext,
-                                "请填写文章链接", Toast.LENGTH_SHORT)
-                        toast.show()
+                        input_layout_content.isErrorEnabled = true
+                        input_layout_content.error = getString(R.string.please_input_content)
+                    } else {
+                        input_layout_content.isErrorEnabled = false
                     }
-                    return@filter !TextUtils.isEmpty(url)
+                    !TextUtils.isEmpty(url)
                 })
     }
 
-    override fun sendIntent(): Observable<String> {
-        return bt_send.clicks()
-                .map { et_user_url.text.toString() }
-                .filter({ url ->
-                    if (TextUtils.isEmpty(url)) {
-                        //TODO show Toast
-                        val toast = Toast.makeText(applicationContext,
-                                "请填写文章链接", Toast.LENGTH_SHORT)
-                        toast.show()
-                    }
-                    return@filter !TextUtils.isEmpty(url)
-                })
-    }
+    override fun previewIntent() = getContentUrl(bt_preview.clicks())
+
+    override fun sendIntent() = getContentUrl(bt_send.clicks())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,8 +61,7 @@ class MainActivity : BaseActivity(), SenderContract.View {
     private fun initView() {
         loadingView = CatLoadingView()
         bt_clear.setOnClickListener {
-            //TODO test
-            et_user_url.setText("https://mp.weixin.qq.com/s/46Vzcw029FHpMW7Qf8My5Q")
+            et_content_url.setText("")
         }
 
         setSupportActionBar(toolbar)

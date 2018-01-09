@@ -13,6 +13,7 @@
     <string name="Done">Done</string>
     <string name="email_hint">请填入您的认可邮箱</string>
     <string name="from_email_hint">请填写正确的发送邮箱</string>
+    <string name="please_input_content">请填写正确的文章链接</string>
     <string name="to_email_hint">请填入Kindle接收邮箱</string>
     <string name="show_done">设置完成</string>
     <string name="show_success">发送成功</string>

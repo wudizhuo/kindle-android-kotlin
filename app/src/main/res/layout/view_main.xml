@@ -1,76 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/containerView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#eeeeee"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/containerView"
+    <include layout="@layout/toolbar" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#eeeeee"
-        android:orientation="vertical">
-
-        <include layout="@layout/toolbar" />
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/common_page_edge_padding">
 
         <EditText
-            android:id="@+id/et_user_url"
+            android:id="@+id/et_content_url"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:background="#e0e0e0"
-            android:gravity="top"
-            android:padding="5dp" />
-
-        <LinearLayout
-            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_page_edge_padding">
+            android:background="#e0e0e0"
+            android:inputType="textUri"
+            android:minHeight="150dp"
+            android:padding="5dp" />
+    </android.support.design.widget.TextInputLayout>
 
-            <Button
-                android:id="@+id/bt_clear"
-                style="@style/sendButton"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_selector"
-                android:text="@string/clear_content" />
-
-            <Button
-                android:id="@+id/bt_preview"
-                style="@style/sendButton"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_selector"
-                android:text="@string/preview" />
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_page_edge_padding">
 
         <Button
-            android:id="@+id/bt_send"
+            android:id="@+id/bt_clear"
             style="@style/sendButton"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
-            android:layout_marginTop="@dimen/common_page_edge_padding"
-            android:background="@drawable/btn_selector"
-            android:text="@string/send_to_kindle" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="bottom|center_horizontal"
-            android:paddingBottom="10dp"
-            android:text="@string/main_tips"
-            android:textColor="@color/primary"
-            android:textSize="14sp" />
+            android:background="@drawable/btn_selector"
+            android:text="@string/clear_content" />
+
+        <Button
+            android:id="@+id/bt_preview"
+            style="@style/sendButton"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_selector"
+            android:text="@string/preview" />
     </LinearLayout>
-</FrameLayout>
+
+    <Button
+        android:id="@+id/bt_send"
+        style="@style/sendButton"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="@dimen/common_page_edge_padding"
+        android:background="@drawable/btn_selector"
+        android:text="@string/send_to_kindle" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="bottom|center_horizontal"
+        android:paddingBottom="10dp"
+        android:text="@string/main_tips"
+        android:textColor="@color/primary"
+        android:textSize="14sp" />
+</LinearLayout>

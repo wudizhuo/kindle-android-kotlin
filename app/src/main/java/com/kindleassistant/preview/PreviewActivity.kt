@@ -7,8 +7,6 @@ import com.kindleassistant.R
 import com.kindleassistant.common.BaseActivity
 import kotlinx.android.synthetic.main.activity_preview.*
 
-//TODO 右上角放发送按钮
-//TODO 加返回按钮
 class PreviewActivity : BaseActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
