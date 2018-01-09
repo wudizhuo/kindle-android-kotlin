@@ -36,18 +36,18 @@ class SettingActivity : BaseActivity() {
         webview.loadUrl("file:///android_asset/setting-guide.html")
 
         bt_save.setOnClickListener {
-            val fromEmail = et_from_email.text.toString()
-            val toEmail = et_to_email.text.toString() + sp_emails.selectedItem.toString()
 
+            val fromEmail = et_from_email.text.toString()
             fromEmail.isNotEmpty().apply {
                 input_layout_from_email.isErrorEnabled = false
+                AppPreferences.setFromEmail(fromEmail)
             }
-            toEmail.isNotEmpty().apply {
+            et_to_email.text.isNotEmpty().apply {
+                val toEmail = et_to_email.text.toString() + sp_emails.selectedItem.toString()
                 input_layout_to_email.isErrorEnabled = false
+                AppPreferences.setToEmail(toEmail)
             }
 
-            AppPreferences.setEmail(toEmail)
-            AppPreferences.setFromEmail(fromEmail)
             Snackbar.make(bt_save, R.string.show_done, Snackbar.LENGTH_LONG).show()
         }
     }

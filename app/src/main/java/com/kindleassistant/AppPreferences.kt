@@ -24,7 +24,7 @@ object AppPreferences {
         return sPreferences.edit().putBoolean(HAS_SLIDINGGUIDE, value).commit()
     }
 
-    fun setEmail(value: String): Boolean {
+    fun setToEmail(value: String): Boolean {
         return sPreferences.edit().putString(USER_TO_EMAIL, value).commit()
     }
 
