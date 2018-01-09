@@ -13,7 +13,7 @@ class SettingActivity : BaseActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
-
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         val fromEmailPref = AppPreferences.fromEmail
         if (TextUtils.isEmpty(fromEmailPref)) {
             input_layout_from_email.isErrorEnabled = true
