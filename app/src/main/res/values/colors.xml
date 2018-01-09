@@ -11,11 +11,7 @@
     <color name="text_color">#000</color>
     <color name="actionbar_background_dark">#1875F0</color>
 
-    <drawable name="btn_pressed">#1976D2</drawable>
-    <drawable name="btn_nomal">#2196F3</drawable>
-
     <color name="primary">#2196F3</color>
 
     <color name="accent">#536DFE</color>
-    <color name="text_menu_press">#252525</color>
 </resources>

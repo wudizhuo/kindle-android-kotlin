@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_page_edge_padding">
 
-        <Button
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/bt_clear"
             style="@style/sendButton"
             android:layout_width="0dp"
@@ -38,10 +38,9 @@
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
             android:layout_weight="1"
-            android:background="@drawable/btn_selector"
             android:text="@string/clear_content" />
 
-        <Button
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/bt_preview"
             style="@style/sendButton"
             android:layout_width="0dp"
@@ -49,11 +48,10 @@
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
             android:layout_weight="1"
-            android:background="@drawable/btn_selector"
             android:text="@string/preview" />
     </LinearLayout>
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/bt_send"
         style="@style/sendButton"
         android:layout_width="match_parent"
@@ -61,7 +59,6 @@
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:layout_marginTop="@dimen/common_page_edge_padding"
-        android:background="@drawable/btn_selector"
         android:text="@string/send_to_kindle" />
 
     <TextView
