@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="top"
-            android:inputType="textUri"
+            android:inputType="textMultiLine"
             android:minHeight="150dp"
             android:padding="5dp"
             android:paddingTop="@dimen/common_page_edge_padding" />
