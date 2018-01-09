@@ -13,6 +13,7 @@ import com.jakewharton.rxbinding2.view.clicks
 import com.kindleassistant.App
 import com.kindleassistant.R
 import com.kindleassistant.common.BaseActivity
+import com.kindleassistant.feedback.FeedbackActivity
 import com.kindleassistant.helper.HelperActivity
 import com.kindleassistant.preview.PreviewActivity
 import com.kindleassistant.setting.SettingActivity
@@ -104,6 +105,7 @@ class MainActivity : BaseActivity(), SenderContract.View {
                             startActivity(Intent(this, SettingActivity::class.java))
                         }
                         R.id.item_navigation_drawer_feedback -> {
+                            startActivity(Intent(this, FeedbackActivity::class.java))
                             ToastUtil.show("欢迎到我的微博：无敌卓，反馈沟通。")
                         }
                         R.id.item_navigation_drawer_upload -> {

@@ -24,6 +24,7 @@
         <activity android:name=".setting.SettingActivity" />
         <activity android:name=".upload.UploadActivity" />
         <activity android:name=".preview.PreviewActivity" />
+        <activity android:name=".feedback.FeedbackActivity" />
 
         <activity
             android:name="com.nononsenseapps.filepicker.FilePickerActivity"
