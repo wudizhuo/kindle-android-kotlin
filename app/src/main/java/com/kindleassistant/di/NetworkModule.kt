@@ -49,10 +49,8 @@ class NetworkModule {
     internal fun provideRestApi(@ForApplication context: Context,
                                 httpClient: OkHttpClient,
                                 gsonConverterFactory: GsonConverterFactory): RestApi {
-        //TODO remove v3
-        //add Activity aniatation
         val retrofit = Retrofit.Builder()
-                .baseUrl("http://api.kindlezhushou.com/v3/")
+                .baseUrl("http://api.kindlezhushou.com/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(gsonConverterFactory)
                 .client(httpClient)
