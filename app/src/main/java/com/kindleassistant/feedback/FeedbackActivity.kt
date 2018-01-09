@@ -12,6 +12,7 @@ import com.kindleassistant.R
 import com.kindleassistant.common.BaseActivity
 import kotlinx.android.synthetic.main.activity_feedback.*
 
+
 class FeedbackActivity : BaseActivity() {
     @SuppressLint("SetJavaScriptEnabled")
     public override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,10 +24,10 @@ class FeedbackActivity : BaseActivity() {
 
         val nickname = "Kindle用户"
         val headimgurl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3ITqUBw6uHLZaMR-zOyiggjAJWZ_lpb4T2moi9MutqpwuWJSQ"
-        val openid = (AppPreferences.fromEmail + AppPreferences.toEmail).hashCode()
+        val openid = AppPreferences.openId
         val url = "https://support.qq.com/product/22012"
 
-        val postData = "nickname=$nickname&avatar=$headimgurl&openid=$openid" as String
+        val postData = "nickname=$nickname&avatar=$headimgurl&openid=$openid"
 
         webView.webViewClient = webViewClient
         webView.webChromeClient = object : WebChromeClient() {

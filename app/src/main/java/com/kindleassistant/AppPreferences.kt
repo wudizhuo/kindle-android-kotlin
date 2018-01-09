@@ -1,6 +1,7 @@
 package com.kindleassistant
 
 import android.preference.PreferenceManager
+import java.util.*
 
 object AppPreferences {
     private var sPreferences = PreferenceManager.getDefaultSharedPreferences(App
@@ -9,6 +10,7 @@ object AppPreferences {
     private val HAS_SLIDINGGUIDE = "has_slidingguide"
     private val USER_TO_EMAIL = "user_to_email"
     private val USER_FROM_EMAIL = "user_from_email"
+    private val OPENID = "OPENID"
 
     val hasSlidingGuide: Boolean
         get() = sPreferences.getBoolean(HAS_SLIDINGGUIDE, false)
@@ -30,4 +32,17 @@ object AppPreferences {
         return sPreferences.edit().putString(USER_FROM_EMAIL, value).commit()
     }
 
+    val openId: String
+        get() {
+            var openId = sPreferences.getString(OPENID, "")
+            if (openId.isEmpty()) {
+                openId = UUID.nameUUIDFromBytes((AppPreferences.fromEmail + AppPreferences.toEmail).toByteArray()).toString()
+                setOpenId(openId)
+            }
+            return openId
+        }
+
+    private fun setOpenId(value: String): Boolean {
+        return sPreferences.edit().putString(OPENID, value).commit()
+    }
 }
