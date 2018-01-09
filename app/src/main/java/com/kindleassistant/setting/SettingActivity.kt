@@ -49,6 +49,7 @@ class SettingActivity : BaseActivity() {
             }
 
             Snackbar.make(bt_save, R.string.show_done, Snackbar.LENGTH_LONG).show()
+            finish()
         }
     }
 }
