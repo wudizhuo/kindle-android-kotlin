@@ -1,10 +1,12 @@
 package com.kindleassistant.sender
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
+import android.text.ClipboardManager
 import android.text.TextUtils
 import android.view.MenuItem
 import android.view.View
@@ -70,6 +72,31 @@ class MainActivity : BaseActivity(), SenderContract.View {
             setDisplayHomeAsUpEnabled(true)
         }
         setupNavigationDrawerContent(navigation_view as NavigationView)
+    }
+
+    private var isShared: Boolean = false
+
+    override fun onResume() {
+        super.onResume()
+        getSendUrl()
+    }
+
+    private fun getSendUrl() {
+        if (Intent.ACTION_SEND == this.intent.action && intent.type != null && !isShared) {
+            var sharedUrl = this.intent.getStringExtra(Intent.EXTRA_TEXT)
+            if (!TextUtils.isEmpty(sharedUrl) && sharedUrl.contains("http://")) {
+                sharedUrl = sharedUrl.substring(sharedUrl.indexOf("http:"))
+                et_content_url.setText(sharedUrl)
+                isShared = true
+            }
+        }
+
+        val clipboarManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+
+        if (clipboarManager.text != null && !isShared) {
+            et_content_url.setText(clipboarManager.text.toString())
+            isShared = false
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
