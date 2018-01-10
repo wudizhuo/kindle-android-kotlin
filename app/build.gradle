@@ -8,11 +8,12 @@ android {
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
     defaultConfig {
+        versionCode 25
+        versionName "3.1"
+
         applicationId "com.kindleassistant"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 23
-        versionName "3.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
