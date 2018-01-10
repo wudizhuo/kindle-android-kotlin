@@ -1,5 +1,6 @@
 package com.kindleassistant.sender
 
+import android.content.ClipDescription.MIMETYPE_TEXT_HTML
 import android.content.ClipDescription.MIMETYPE_TEXT_PLAIN
 import android.content.ClipboardManager
 import android.content.Context
@@ -28,11 +29,22 @@ import kotlinx.android.synthetic.main.toolbar.*
 import kotlinx.android.synthetic.main.view_main.*
 import javax.inject.Inject
 
-
 class MainActivity : BaseActivity(), SenderContract.View {
     @Inject
     lateinit var presenter: SenderContract.Presenter
     private lateinit var loadingView: CatLoadingView
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        App.appComponent.inject(this)
+
+        setContentView(R.layout.activity_main)
+        presenter.attachView(this)
+
+        initView()
+
+        checkShareUrl()
+    }
 
     private fun getContentUrl(observable: Observable<Unit>): Observable<String> {
         return observable
@@ -52,14 +64,32 @@ class MainActivity : BaseActivity(), SenderContract.View {
 
     override fun sendIntent() = getContentUrl(bt_send.clicks())
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        App.appComponent.inject(this)
+    private fun checkShareUrl(): Boolean {
+        if (Intent.ACTION_SEND == intent.action && intent.type != null) {
+            if ("text/plain" == intent.type) {
+                handleShareText(intent)
+                return true
+            } else if (intent.type.startsWith("image/")) {
+                handleSendImage(intent)
+                return true
+            }
+        }
+        return false
+    }
 
-        setContentView(R.layout.activity_main)
-        presenter.attachView(this)
+    //TODO 分享图片
+    private fun handleSendImage(intent: Intent) {
+//        val imageUri = intent.getParcelableExtra(Intent.EXTRA_STREAM) as Uri
+//        if (imageUri != null) {
+//            // Update UI to reflect image being shared
+//        }
+    }
 
-        initView()
+    private fun handleShareText(intent: Intent) {
+        val sharedText = intent.getStringExtra(Intent.EXTRA_TEXT)
+        sharedText.isNotEmpty().apply {
+            et_content_url.setText(sharedText)
+        }
     }
 
     private fun initView() {
@@ -76,35 +106,19 @@ class MainActivity : BaseActivity(), SenderContract.View {
         setupNavigationDrawerContent(navigation_view as NavigationView)
     }
 
-    private var isShared: Boolean = false
-
     override fun onResume() {
         super.onResume()
-        getSendUrl()
-    }
-
-    private fun getSendUrl() {
-        if (Intent.ACTION_SEND == this.intent.action && intent.type != null && !isShared) {
-            var sharedUrl = this.intent.getStringExtra(Intent.EXTRA_TEXT)
-            if (!TextUtils.isEmpty(sharedUrl) && sharedUrl.contains("http://")) {
-                sharedUrl = sharedUrl.substring(sharedUrl.indexOf("http:"))
-                et_content_url.setText(sharedUrl)
-                isShared = true
-            }
-        }
-
         getClipboardData()
     }
 
     private fun getClipboardData() {
+        if (et_content_url.text.isNotEmpty()) {
+            return
+        }
         val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        if (clipboard.hasPrimaryClip() && clipboard.primaryClipDescription.hasMimeType(MIMETYPE_TEXT_PLAIN)) {
-
+        if (clipboard.hasPrimaryClip() && (clipboard.primaryClipDescription.hasMimeType(MIMETYPE_TEXT_PLAIN) || clipboard.primaryClipDescription.hasMimeType(MIMETYPE_TEXT_HTML))) {
             val pasteData = clipboard.primaryClip.getItemAt(0).text
-            if (!isShared) {
-                et_content_url.setText(pasteData)
-                isShared = false
-            }
+            et_content_url.setText(pasteData)
         }
     }
 
