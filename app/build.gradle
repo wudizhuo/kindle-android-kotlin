@@ -11,7 +11,7 @@ android {
         applicationId "com.kindleassistant"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 22
+        versionCode 23
         versionName "3.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -33,6 +33,10 @@ android {
             keyAlias "kindlezhushou"
             keyPassword System.getenv("KEYPWD")
         }
+    }
+
+    lintOptions {
+        abortOnError false
     }
 
     buildTypes {
