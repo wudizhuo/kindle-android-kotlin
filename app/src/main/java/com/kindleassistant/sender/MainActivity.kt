@@ -1,12 +1,13 @@
 package com.kindleassistant.sender
 
+import android.content.ClipDescription.MIMETYPE_TEXT_PLAIN
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
-import android.text.ClipboardManager
 import android.text.TextUtils
 import android.view.MenuItem
 import android.view.View
@@ -26,6 +27,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 import kotlinx.android.synthetic.main.view_main.*
 import javax.inject.Inject
+
 
 class MainActivity : BaseActivity(), SenderContract.View {
     @Inject
@@ -91,11 +93,18 @@ class MainActivity : BaseActivity(), SenderContract.View {
             }
         }
 
-        val clipboarManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        getClipboardData()
+    }
 
-        if (clipboarManager.text != null && !isShared) {
-            et_content_url.setText(clipboarManager.text.toString())
-            isShared = false
+    private fun getClipboardData() {
+        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        if (clipboard.hasPrimaryClip() && clipboard.primaryClipDescription.hasMimeType(MIMETYPE_TEXT_PLAIN)) {
+
+            val pasteData = clipboard.primaryClip.getItemAt(0).text
+            if (!isShared) {
+                et_content_url.setText(pasteData)
+                isShared = false
+            }
         }
     }
 
