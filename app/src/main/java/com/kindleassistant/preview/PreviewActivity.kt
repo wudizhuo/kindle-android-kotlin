@@ -12,7 +12,7 @@ class PreviewActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_preview)
 
-        var content = intent.extras.getString("content")
+        val content = intent.getStringExtra("content")
 
         webView.webChromeClient = object : WebChromeClient() {
             override fun onProgressChanged(view: WebView, newProgress: Int) {
