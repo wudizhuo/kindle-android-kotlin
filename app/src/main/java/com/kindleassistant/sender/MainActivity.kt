@@ -112,7 +112,7 @@ class MainActivity : BaseActivity(), SenderContract.View {
     }
 
     private fun getClipboardData() {
-        if (et_content_url.text.isNotEmpty()) {
+        if (et_content_url.text != null) {
             return
         }
         val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager

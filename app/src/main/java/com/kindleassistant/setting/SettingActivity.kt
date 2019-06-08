@@ -42,7 +42,8 @@ class SettingActivity : BaseActivity() {
                 input_layout_from_email.isErrorEnabled = false
                 AppPreferences.setFromEmail(fromEmail)
             }
-            et_to_email.text.isNotEmpty().apply {
+            val toEmail = et_to_email.text.toString()
+            toEmail.isNotEmpty().apply {
                 val toEmail = et_to_email.text.toString() + sp_emails.selectedItem.toString()
                 input_layout_to_email.isErrorEnabled = false
                 AppPreferences.setToEmail(toEmail)

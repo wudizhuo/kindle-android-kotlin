@@ -16,9 +16,9 @@ object AppPreferences {
         get() = sPreferences.getBoolean(HAS_SLIDINGGUIDE, false)
 
     val toEmail: String
-        get() = sPreferences.getString(USER_TO_EMAIL, "")
+        get() = sPreferences.getString(USER_TO_EMAIL, "")!!
     val fromEmail: String
-        get() = sPreferences.getString(USER_FROM_EMAIL, "")
+        get() = sPreferences.getString(USER_FROM_EMAIL, "")!!
 
     fun setHasSlidingGuide(value: Boolean): Boolean {
         return sPreferences.edit().putBoolean(HAS_SLIDINGGUIDE, value).commit()
