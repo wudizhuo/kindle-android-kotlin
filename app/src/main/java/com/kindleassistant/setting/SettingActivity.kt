@@ -1,8 +1,8 @@
 package com.kindleassistant.setting
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.text.TextUtils
+import com.google.android.material.snackbar.Snackbar
 import com.kindleassistant.AppPreferences
 import com.kindleassistant.R
 import com.kindleassistant.common.BaseActivity
