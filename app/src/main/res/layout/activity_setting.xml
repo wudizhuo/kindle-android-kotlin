@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/common_page_edge_padding">
 
-        <android.support.v7.widget.AppCompatEditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/et_from_email"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -36,7 +36,7 @@
             android:layout_weight="1"
             android:paddingTop="@dimen/common_page_edge_padding">
 
-            <android.support.v7.widget.AppCompatEditText
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/et_to_email"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -57,7 +57,7 @@
             android:minWidth="30dp" />
     </LinearLayout>
 
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bt_save"
         style="@style/sendButton"
         android:layout_width="match_parent"
