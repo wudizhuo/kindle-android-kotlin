@@ -66,7 +66,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
-    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.droidninja:filepicker:2.1.1'
     implementation 'com.roger.catloadinglibrary:catloadinglibrary:1.0.1'
     implementation('com.lsjwzh:materialloadingprogressbar:0.5.8-RELEASE')
